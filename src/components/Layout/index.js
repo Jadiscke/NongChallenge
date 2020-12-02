@@ -7,14 +7,15 @@ import {
   Toolbar,
   createMuiTheme,
 } from "@material-ui/core";
-import { green, lightBlue } from "@material-ui/core/colors";
+import { blue, green, lightBlue } from "@material-ui/core/colors";
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: green[500],
     },
     text: {
-      primary: lightBlue[50],
+      primary: lightBlue[700],
+      secondary: blue[900],
     },
   },
 });
@@ -25,7 +26,7 @@ function Layout(props) {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar>
-            <Typography type="title" color="textPrimary">
+            <Typography type="title" color="textSecondary">
               Crop Scouting App
             </Typography>
           </Toolbar>

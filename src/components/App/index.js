@@ -50,13 +50,13 @@ function App() {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar>
-            <Typography type="title" color="inherit">
-              My Awesome React App
+            <Typography type="title" color="textPrimary">
+              Crop Scouting App
             </Typography>
           </Toolbar>
         </AppBar>
         <Container maxWidth="xl">
-          <Grid spacing={3} container direction="row" justify="flex-start">
+          <Grid spacing={1} container direction="row" justify="space-around">
             {notesList}
           </Grid>
         </Container>

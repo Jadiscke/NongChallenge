@@ -30,6 +30,7 @@ function Note(props) {
       xs={12}
       sm={6}
       md={4}
+      xl={3}
       direction="column"
       justify="flex-start"
       alignItems="flex-start"

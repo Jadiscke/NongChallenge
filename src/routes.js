@@ -15,15 +15,15 @@ const Routes = () => {
     <Router>
       <Switch>
         <Route exact path="/notes">
-          {user.id ? <Redirect to="/notes" /> : <Redirect to="/login" />}
+          {user.uid ? <Redirect to="/notes" /> : <Redirect to="/login" />}
           <Notes />
         </Route>
         <Route exact path="/login">
-          {user.id ? <Redirect to="/notes" /> : <Redirect to="/login" />}
+          {user.uid ? <Redirect to="/notes" /> : <Redirect to="/login" />}
           <Login />
         </Route>
         <Route exact path="/">
-          {user.id ? <Redirect to="/notes" /> : <Redirect to="/login" />}
+          {user.uid ? <Redirect to="/notes" /> : <Redirect to="/login" />}
         </Route>
       </Switch>
     </Router>

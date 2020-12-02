@@ -5,11 +5,11 @@ import UserProvider from "../context/User";
 
 function App() {
   return (
-    <Layout>
-      <UserProvider>
+    <UserProvider>
+      <Layout>
         <Routes />
-      </UserProvider>
-    </Layout>
+      </Layout>
+    </UserProvider>
   );
 }
 

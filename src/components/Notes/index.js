@@ -4,10 +4,8 @@ import { Container, Grid, Typography } from "@material-ui/core";
 
 import firestoreService from "../../services/firestoreService";
 import Note from "../Note";
-import { useUser } from "../../context/User";
 
 function Notes() {
-  const { user } = useUser();
   const [noteState, setNoteState] = useState([
     { key: 0, data: { name: "", description: "", date: "" } },
   ]);
@@ -31,7 +29,7 @@ function Notes() {
   return (
     <Container maxWidth="xl">
       <Typography align="center" variant="h3">
-        Olá {user.name}
+        Notas
       </Typography>
       <Grid spacing={1} container direction="row" justify="space-around">
         {notesList}

@@ -7,8 +7,9 @@ import {
   Button,
 } from "@material-ui/core";
 import { yellow } from "@material-ui/core/colors";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../../context/User";
+import firebaseAuthService from "../../services/firebaseAuthService";
 
 const styles = makeStyles({
   login: {
@@ -26,9 +27,27 @@ const styles = makeStyles({
 
 function Login() {
   const classes = styles();
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginAttempt, setLoginAttempt] = useState(false);
+  const [loginError, setLoginError] = useState();
+  useEffect(() => {
+    firebaseAuthService.onAuthStateChangedSetUser(setUser);
+  }, [loginAttempt]);
   return (
     <Container className={classes.login} maxWidth="sm">
+      {loginError && (
+        <Typography
+          variant="body2"
+          component="span"
+          color="secondary"
+          align="center"
+        >
+          Houve um erro ao tentar o acesso ao sistema. Verifique seu e-mail e
+          senha!
+        </Typography>
+      )}
       <Typography variant="h5" component="h3" align="center">
         Login
       </Typography>
@@ -42,6 +61,11 @@ function Login() {
           className={classes.field}
           required
           variant="outlined"
+          id="email"
+          value={email}
+          onInput={(event) => {
+            setEmail(event.target.value);
+          }}
         ></TextField>
       </FormControl>
       <FormControl>
@@ -53,6 +77,11 @@ function Login() {
           className={classes.field}
           required
           variant="outlined"
+          id="password"
+          value={password}
+          onInput={(event) => {
+            setPassword(event.target.value);
+          }}
         ></TextField>
       </FormControl>
       <Button
@@ -60,7 +89,10 @@ function Login() {
         color="primary"
         type="button"
         onClick={() => {
-          setUser({ id: 1, name: "Vinicius" });
+          setLoginError(
+            firebaseAuthService.signInWithEmailAndPassword(email, password)
+          );
+          setLoginAttempt(true);
         }}
       >
         Login

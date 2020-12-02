@@ -21,7 +21,7 @@ function Note(props) {
   const classes = styles();
   const date = props.data.date;
   if (date) var newDate = date.toDate().toLocaleDateString("pt-BR");
-  console.log(newDate);
+
   return (
     <Grid
       container
@@ -51,4 +51,4 @@ function Note(props) {
   );
 }
 
-export { Note };
+export default Note;

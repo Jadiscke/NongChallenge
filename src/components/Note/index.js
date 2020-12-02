@@ -51,4 +51,4 @@ function Note(props) {
   );
 }
 
-export { Note };
+export default Note;

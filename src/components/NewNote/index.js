@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { Button, Icon, IconButton, TextField, Box } from "@material-ui/core";
 import firestoreService from "../../services/firestoreService";
+import { useNotes } from "../../context/Notes";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
   box: {
+    display: "inline-box",
     textAlign: "right",
   },
   submitButton: {
@@ -25,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewNote({ loadNotes }) {
+function NewNote({ loadNotes, className }) {
+  const { notes, setNotes } = useNotes();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -47,13 +50,14 @@ function NewNote({ loadNotes }) {
       console.log(error);
     }
     setAnchorEl(null);
+    loadNotes();
   };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className={classes.box}>
+    <div className={[classes.box, className]}>
       <IconButton aria-describedby={id} onClick={handleClick}>
         <Icon fontSize="large" color="primary">
           add_circle

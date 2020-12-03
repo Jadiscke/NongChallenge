@@ -8,7 +8,7 @@ class FirebaseDb {
   async getNotes() {
     try {
       const notesCollection = await returnNotesCollection();
-      const getNotes = await notesCollection.get();
+      const getNotes = await notesCollection.orderBy("date").get();
       const notes = getNotes.docs.map((doc) => {
         const data = {
           key: doc.id,
@@ -16,7 +16,7 @@ class FirebaseDb {
         };
         return data;
       });
-      console.log("notes: ", notes);
+
       return notes;
     } catch (err) {
       return err;

@@ -17,38 +17,40 @@ const styles = makeStyles({
   },
 });
 
-function Note({ data, key }) {
+function Note({ data }) {
   const classes = styles();
   const date = data.date;
   if (date) var newDate = date.toDate().toLocaleDateString("pt-BR");
-
-  return (
-    <Grid
-      container
-      item
-      noWrap
-      xs={12}
-      sm={6}
-      md={4}
-      xl={3}
-      direction="column"
-      justify="flex-start"
-      alignItems="flex-start"
-      key={key}
-      className={classes.note}
-    >
-      <Typography component="h5" variant="h5">
-        Nome: {data.name}
-      </Typography>
-      <Divider />
-      <Typography component="p" variant="body1">
-        Descrição: {data.description}
-      </Typography>
-      <Typography className={classes.date} component="body2" variant="body2">
-        {date ? newDate : "dd/mm/aaaa"}
-      </Typography>
-    </Grid>
-  );
+  if (data.name) {
+    return (
+      <Grid
+        container
+        item
+        nowrap="nowrap"
+        xs={12}
+        sm={6}
+        md={4}
+        xl={3}
+        direction="column"
+        justify="flex-start"
+        alignItems="flex-start"
+        className={classes.note}
+      >
+        <Typography component="p" variant="body1">
+          Nome: {data.name}
+        </Typography>
+        <Divider />
+        <Typography component="p" variant="body1">
+          Descrição: {data.description}
+        </Typography>
+        <Typography className={classes.date} component="span" variant="body2">
+          {date ? newDate : "dd/mm/aaaa"}
+        </Typography>
+      </Grid>
+    );
+  } else {
+    return null;
+  }
 }
 
 export default Note;

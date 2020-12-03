@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "../../context/User";
 import firebaseAuthService from "../../services/firebaseAuthService";
 
-const styles = makeStyles({
+const styles = makeStyles((theme) => ({
   login: {
     backgroundColor: yellow[50],
     padding: "3em 0",
@@ -23,7 +23,10 @@ const styles = makeStyles({
     maxWidth: "20em",
     margin: "1em auto",
   },
-});
+  button: {
+    padding: "1em 5em",
+  },
+}));
 
 function Login() {
   const classes = styles();
@@ -88,6 +91,8 @@ function Login() {
         variant="contained"
         color="primary"
         type="button"
+        centerRipple
+        className={[classes.button, classes.field]}
         onClick={async () => {
           const authError = await firebaseAuthService.signInWithEmailAndPassword(
             email,

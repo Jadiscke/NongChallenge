@@ -1,14 +1,15 @@
-import { firebaseDb } from "../utils/firebase";
+import { firebaseDb, firestore } from "../utils/firebase";
 
-const getNotesCollection = async () => {
-  return await firebaseDb.collection("notes").get();
+const returnNotesCollection = async () => {
+  return await firebaseDb.collection("notes");
 };
 
 class FirebaseDb {
   async getNotes() {
     try {
-      const notesCollection = await getNotesCollection();
-      const notes = notesCollection.docs.map((doc) => {
+      const notesCollection = await returnNotesCollection();
+      const getNotes = await notesCollection.get();
+      const notes = getNotes.docs.map((doc) => {
         const data = {
           key: doc.id,
           data: doc.data(),
@@ -19,6 +20,19 @@ class FirebaseDb {
       return notes;
     } catch (err) {
       return err;
+    }
+  }
+
+  async createNote({ name, description }) {
+    const notesCollection = await returnNotesCollection();
+    try {
+      await notesCollection.add({
+        name: name,
+        description: description,
+        date: firestore.FieldValue.serverTimestamp(),
+      });
+    } catch (err) {
+      console.log(err);
     }
   }
 }

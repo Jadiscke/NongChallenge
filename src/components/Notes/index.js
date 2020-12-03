@@ -1,40 +1,43 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container, Grid, Typography } from "@material-ui/core";
 
 import firestoreService from "../../services/firestoreService";
 import Note from "../Note";
+import NewNote from "../NewNote";
 
 function Notes() {
-  const [noteState, setNoteState] = useState([
+  const [notes, setNotes] = useState([
     { key: 0, data: { name: "", description: "", date: "" } },
   ]);
   useEffect(() => {
     loadNotes();
-  }, []);
+  }, [NewNote]);
 
   const loadNotes = async () => {
     try {
       const notes = await firestoreService.getNotes();
-      console.log(notes);
-      setNoteState(notes);
+      setNotes(notes);
     } catch (err) {
-      console.log(err);
-      setNoteState([{ key: 0, data: { name: "", description: "", date: "" } }]);
+      setNotes([{ key: 0, data: { name: "", description: "", date: "" } }]);
     }
   };
-  const notesList = noteState.map((note) => {
+  const notesList = notes.map((note) => {
     return <Note data={note.data} />;
   });
   return (
-    <Container maxWidth="xl">
+    <>
       <Typography align="center" variant="h3">
         Notas
       </Typography>
-      <Grid spacing={1} container direction="row" justify="space-around">
-        {notesList}
-      </Grid>
-    </Container>
+      <NewNote />
+
+      <Container maxWidth="xl">
+        <Grid spacing={1} container direction="row" justify="space-around">
+          {notes.length > 0 && notesList}
+        </Grid>
+      </Container>
+    </>
   );
 }
 

@@ -17,9 +17,9 @@ const styles = makeStyles({
   },
 });
 
-function Note(props) {
+function Note({ data, key }) {
   const classes = styles();
-  const date = props.data.date;
+  const date = data.date;
   if (date) var newDate = date.toDate().toLocaleDateString("pt-BR");
 
   return (
@@ -34,15 +34,15 @@ function Note(props) {
       direction="column"
       justify="flex-start"
       alignItems="flex-start"
-      key={props.key}
+      key={key}
       className={classes.note}
     >
       <Typography component="h5" variant="h5">
-        Nome: {props.data.name}
+        Nome: {data.name}
       </Typography>
       <Divider />
-      <Typography component="body1" variant="body1">
-        Descrição: {props.data.description}
+      <Typography component="p" variant="body1">
+        Descrição: {data.description}
       </Typography>
       <Typography className={classes.date} component="body2" variant="body2">
         {date ? newDate : "dd/mm/aaaa"}

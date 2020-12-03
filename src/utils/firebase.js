@@ -6,4 +6,5 @@ import firebaseConfig from "./firebase.config";
 
 export const firebaseInit = firebase.initializeApp(firebaseConfig);
 export const firebaseDb = firebase.firestore();
+export const firestore = firebase.firestore;
 export const firebaseAuth = firebase.auth();

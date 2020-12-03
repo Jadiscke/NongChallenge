@@ -19,14 +19,10 @@ const Routes = () => {
   const [loadScreen, setLoadScreen] = useState(true);
 
   useEffect(() => {
-    firebaseAuthService.onAuthStateChangedSetUser(
-      setUser,
-      setLoadScreen,
-      false
-    );
-    firestoreService.getNotes().then((notes) => {
-      setNotes(notes);
-    });
+    firebaseAuthService.onAuthStateChangedSetUser(setUser);
+    setTimeout(() => {
+      setLoadScreen(false);
+    }, 500);
   }, []);
   if (loadScreen) {
     return null;

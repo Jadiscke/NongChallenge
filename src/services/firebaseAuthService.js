@@ -9,7 +9,7 @@ class FirebaseAuth {
     }
   }
 
-  onAuthStateChangedSetUser(callback) {
+  onAuthStateChangedSetUser(callback, optionalCallback, optionalCallbackValue) {
     /**
      * Receive setUser
      */
@@ -17,6 +17,9 @@ class FirebaseAuth {
       if (user) {
         const { email, uid } = user;
         callback({ email, uid });
+        if (optionalCallback) {
+          optionalCallback(optionalCallbackValue);
+        }
       } else {
         callback({});
       }

@@ -43,13 +43,10 @@ function Layout({ children }) {
       <React.Fragment>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton}>
-              <Icon>menu</Icon>
-            </IconButton>
-
             <Typography
               className={classes.title}
-              variant="h5"
+              variant="h6"
+              component="h1"
               type="title"
               color="textSecondary"
             >

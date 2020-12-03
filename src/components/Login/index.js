@@ -88,10 +88,15 @@ function Login() {
         variant="contained"
         color="primary"
         type="button"
-        onClick={() => {
-          setLoginError(
-            firebaseAuthService.signInWithEmailAndPassword(email, password)
+        onClick={async () => {
+          const authError = await firebaseAuthService.signInWithEmailAndPassword(
+            email,
+            password
           );
+          if (authError) {
+            console.log(authError);
+            setLoginError(authError);
+          }
           setLoginAttempt(true);
         }}
       >

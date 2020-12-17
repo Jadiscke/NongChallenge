@@ -6,6 +6,9 @@ This project is a [challenge](https://github.com/gabrielgnc94/NONG-Code-Challeng
 ## Host
 
 Hosted on firebase: [DEMO](https://nong-8b830.web.app)
+user for test:
+  - user: user@test.com
+  - password: password
 
 ## Things you need
 
